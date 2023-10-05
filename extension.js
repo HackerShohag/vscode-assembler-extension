@@ -73,7 +73,7 @@ vscode.commands.registerCommand('extension.runAssembly', () => {
 function installAssembleScript() {
 	try {
 		// Get the extension's installation path
-		const extensionPath = vscode.extensions.getExtension('yourusername.vscode-assemble-extension').extensionPath;
+		const extensionPath = vscode.extensions.getExtension('yourusername.assembler').extensionPath;
 
 		// Define the source and destination paths for the 'assemble' script
 		const sourcePath = path.join(extensionPath, 'scripts', 'assemble');
