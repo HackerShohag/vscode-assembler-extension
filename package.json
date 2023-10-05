@@ -1,0 +1,59 @@
+{
+  "name": "assembler",
+  "displayName": "Assembly Code Runner",
+  "description": "A assembly code runner that compiles using NASM and links through GCC to make executable for host platform.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.83.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:extension.runAssembly"
+  ],
+  "main": "./extension.js",
+  "author": {
+    "name": "Abdullah AL Shohag"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "assembler.helloWorld",
+        "title": "Hello World"
+      },
+      {
+        "command": "extension.runAssembly",
+        "title": "Run Assembly Code"
+      },
+      {
+        "command": "extension.installAssembleScript",
+        "title": "Install Assemble Script"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.2",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.83.0",
+    "@vscode/test-electron": "^2.3.4",
+    "eslint": "^8.50.0",
+    "glob": "^10.3.3",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "vscode": "^1.1.37"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HackerShohag/RUET-CSE/blob/main/CSE-2206/assemble"
+  },
+  "license": "MIT"
+}
