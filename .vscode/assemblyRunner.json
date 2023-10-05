@@ -1,0 +1,12 @@
+{
+    "code-runner.executorMap": {
+        "assembly": "cd $dir && ./assemble $fileName && ./$fileNameWithoutExt"
+    },
+    "code-runner.executorMapByFileExtension": {
+        ".asm": "cd $dir && ./assemble $fileName"
+    },
+    "code-runner.executorMapByFile": {
+        "assembly": "cd $dir && ./assemble $fileName && ./$fileNameWithoutExt"
+    }
+
+}

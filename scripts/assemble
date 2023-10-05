@@ -27,7 +27,7 @@ if [ $# -eq 0 ] ; then
     exit 0
 fi
 
-if ! [ -f ./$file ]; then
+if ! [ -f $file ]; then
   echo "${RED}${BOLD}ERROR: \"$file\" does not exist.${NORMAL}${NC}\n"
   echo $usage
   exit 0

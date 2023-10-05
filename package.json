@@ -3,25 +3,20 @@
   "displayName": "Assembly Code Runner",
   "description": "A assembly code runner that compiles using NASM and links through GCC to make executable for host platform.",
   "version": "0.0.1",
+  "publisher": "HackerShohag",
   "engines": {
     "vscode": "^1.83.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:extension.runAssembly"
-  ],
+  "activationEvents": [],
   "main": "./extension.js",
   "author": {
     "name": "Abdullah AL Shohag"
   },
   "contributes": {
     "commands": [
-      {
-        "command": "assembler.helloWorld",
-        "title": "Hello World"
-      },
       {
         "command": "extension.runAssembly",
         "title": "Run Assembly Code"
@@ -30,7 +25,33 @@
         "command": "extension.installAssembleScript",
         "title": "Install Assemble Script"
       }
+    ],
+    "languages": [
+      {
+          "id": "assembly",
+          "aliases": ["asm", "assembly"],
+          "extensions": [".asm"],
+          "configuration": "./.vscode/assemblyRunner.json"
+      }
     ]
+  },
+  "tasks": [
+  {
+      "label": "Run Assembly",
+      "type": "shell",
+      "command": "${command:extension.runAssembly}",
+      "group": {
+          "kind": "build",
+          "isDefault": true
+      },
+      "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+      }
+    }
+  ],
+  "code-runner.executorMap": {
+    "assembly": "cd $dir && vscode.extensions.get('HackerShohag.assembler').exports.runAssembly $fileName"
   },
   "scripts": {
     "lint": "eslint .",
@@ -55,5 +76,5 @@
     "type": "git",
     "url": "https://github.com/HackerShohag/RUET-CSE/blob/main/CSE-2206/assemble"
   },
-  "license": "MIT"
+  "license": "GPLv3"
 }

@@ -4,7 +4,7 @@ const vscode = require('vscode');
 const { exec, execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
-
+const extensionID = 'HackerShohag.assembler';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -14,6 +14,13 @@ const path = require('path');
  */
 
 function activate(context) {
+
+	const isActived = vscode.extensions.getExtension(extensionID).isActive;
+
+	if (isActived) {
+		vscode.window.showInformationMessage('Extension is already activated.');
+		return;
+	}
 
 	// Register the 'extension.runAssembly' command
 	context.subscriptions.push(vscode.commands.registerCommand('extension.runAssembly', () => {
@@ -26,22 +33,6 @@ function activate(context) {
 		// Call the 'extension.installAssembleScript' command when triggered
 		vscode.commands.executeCommand('extension.installAssembleScript');
 	}));
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "assembler" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('assembler.helloWorld', function () {
-		// The code you place here will be executed every time your command is executed
-
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Running Assembly Code!');
-	});
-
-	context.subscriptions.push(disposable);
 }
 
 // Register a command to run the 'assemble' script on the currently open assembly file
@@ -52,18 +43,21 @@ vscode.commands.registerCommand('extension.runAssembly', () => {
 	if (editor) {
 		// Get the file path of the active assembly file
 		const filePath = editor.document.fileName;
+		const destinationPath = path.join(__dirname, 'scripts', 'assemble');
 
-		// Run the 'assemble' script with the assembly file as an argument
-		exec(`./assemble ${filePath}`, (error, stdout, stderr) => {
-			if (error) {
-				vscode.window.showErrorMessage(`Error: ${error.message}`);
-				return;
-			}
+		vscode.window.showInformationMessage('Running Assembly Code!');
 
-			// Display the output in the VSCode output channel
-			vscode.window.createOutputChannel('Assembly Output').appendLine(stdout);
-			vscode.window.createOutputChannel('Assembly Output').appendLine(stderr);
-		});
+		const terminal = vscode.window.createTerminal('Assembly Terminal');
+
+		// Change to the directory of the assembly file
+		const fileDir = path.dirname(filePath);
+		terminal.sendText(`cd "${fileDir}"`, true);
+
+		// Execute the 'assemble' command
+		terminal.sendText(`${destinationPath} ${filePath}`, true);
+
+		// Show the terminal
+		terminal.show();
 	} else {
 		vscode.window.showWarningMessage('No active text editor.');
 	}
@@ -73,7 +67,7 @@ vscode.commands.registerCommand('extension.runAssembly', () => {
 function installAssembleScript() {
 	try {
 		// Get the extension's installation path
-		const extensionPath = vscode.extensions.getExtension('yourusername.assembler').extensionPath;
+		const extensionPath = vscode.extensions.getExtension(extensionID).extensionPath;
 
 		// Define the source and destination paths for the 'assemble' script
 		const sourcePath = path.join(extensionPath, 'scripts', 'assemble');
