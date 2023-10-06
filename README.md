@@ -2,6 +2,8 @@
 
 This simple bash script, named 'assemble,' streamlines the process of assembling and compiling assembly code for your host platform using NASM (Netwide Assembler) and GCC (GNU Compiler Collection). With 'assemble,' you can quickly turn your assembly source code into an executable binary with a 'main' section instead of '_start,' making it compatible with C-style program entry points.
 
+![output](https://github.com/HackerShohag/vscode-assembler-extension/assets/47150885/c8a7ef37-20e7-4adf-bd9f-8419ea6e557f)
+
 ## Features
 
 * Simplifies the process of assembling and compiling assembly code.
