@@ -1,12 +1,11 @@
 {
     "code-runner.executorMap": {
-        "assembly": "cd $dir && ./assemble $fileName && ./$fileNameWithoutExt"
+        "assembly": "cd $dir && vscode.extensions.get('HackerShohag.assembler').exports.runAssembly $fileName"
     },
     "code-runner.executorMapByFileExtension": {
-        ".asm": "cd $dir && ./assemble $fileName"
+        ".asm": "cd $dir && vscode.extensions.get('HackerShohag.assembler').exports.runAssembly $fileName"
     },
     "code-runner.executorMapByFile": {
-        "assembly": "cd $dir && ./assemble $fileName && ./$fileNameWithoutExt"
+        "assembly": "cd $dir && vscode.extensions.get('HackerShohag.assembler').exports.runAssembly $fileName"
     }
-
 }

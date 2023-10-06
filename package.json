@@ -2,8 +2,9 @@
   "name": "assembler",
   "displayName": "Assembly Code Runner",
   "description": "A assembly code runner that compiles using NASM and links through GCC to make executable for host platform.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "publisher": "HackerShohag",
+  "icon": "images/assembler-logo.png",
   "engines": {
     "vscode": "^1.83.0"
   },
@@ -22,8 +23,8 @@
         "title": "Run Assembly Code"
       },
       {
-        "command": "extension.installAssembleScript",
-        "title": "Install Assemble Script"
+        "command": "extension.modifyExecutorMap",
+        "title": "Add configuration to Code Runner"
       }
     ],
     "languages": [
@@ -31,7 +32,7 @@
           "id": "assembly",
           "aliases": ["asm", "assembly"],
           "extensions": [".asm"],
-          "configuration": "./.vscode/assemblyRunner.json"
+          "configuration": "path.join(vscode.extensions.get('HackerShohag.assembler').extensionPath, \".vscode\",\"assemblyRunner.json\")" 
       }
     ]
   },
@@ -50,9 +51,6 @@
       }
     }
   ],
-  "code-runner.executorMap": {
-    "assembly": "cd $dir && vscode.extensions.get('HackerShohag.assembler').exports.runAssembly $fileName"
-  },
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
@@ -66,15 +64,15 @@
     "eslint": "^8.50.0",
     "glob": "^10.3.3",
     "mocha": "^10.2.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "vscode": "^1.1.37"
   },
   "dependencies": {
-    "child_process": "^1.0.2",
-    "vscode": "^1.1.37"
+    "child_process": "^1.0.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/HackerShohag/RUET-CSE/blob/main/CSE-2206/assemble"
+    "url": "git@github.com:HackerShohag/vscode-assembler-extension.git"
   },
   "license": "GPLv3"
 }
