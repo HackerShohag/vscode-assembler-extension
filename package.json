@@ -20,15 +20,15 @@
     "commands": [
       {
         "command": "extension.runAssembly",
-        "title": "Run Assembly Code"
+        "title": "Assembler: Assembly Code"
       },
       {
         "command": "extension.installNASMndGCC",
-        "title": "Install NASM and GCC"
+        "title": "Assembler: Install NASM and GCC"
       },
       {
         "command": "extension.modifyExecutorMap",
-        "title": "Add configuration to Code Runner"
+        "title": "Assembler: Add configuration to Code Runner"
       }
     ],
     "languages": [

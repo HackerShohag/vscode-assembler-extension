@@ -56,7 +56,7 @@ function modifyExecutorMapByFileExtension() {
 
 	userSettings.update("code-runner.executorMapByFileExtension", codeRunnerExtConf, vscode.ConfigurationTarget.Global)
 		.then(() => {
-			vscode.window.showInformationMessage('Updated Code Runner Configuration for Assembly.');
+			vscode.window.showInformationMessage('Updated Code Runner Configuration for Assembly Language (.asm).');
 		})
 		.catch(error => {
 			vscode.window.showErrorMessage(`Error updating Assembly Configuration: ${error.message}`);
@@ -71,7 +71,7 @@ function installNASMndGCC() {
 	} else if (platform === 'darwin') {
 		installOnMacOS();
 	} else {
-		vscode.window.showErrorMessage('Please install the software manually.');
+		vscode.window.showErrorMessage('For Linux platform, install the software manually.');
 	}
 }
 
