@@ -1,10 +1,7 @@
 const vscode = require('vscode');
+const { exec } = require('child_process');
 const path = require('path');
 const extensionID = 'HackerShohag.assembler';
-
-/**
- * @param {vscode.ExtensionContext} context
- */
 
 function activate(context) {
 
@@ -16,14 +13,14 @@ function activate(context) {
 	}
 
 	modifyExecutorMapByFileExtension();
-	vscode.window.showInformationMessage('Assembler Extension is activated.');
+	installNASMndGCC();
 
-	context.subscriptions.push(vscode.commands.registerCommand('extension.runAssembly', () => {
-		vscode.commands.executeCommand('extension.runAssembly');
-	}));
+	// context.subscriptions.push(vscode.commands.registerCommand('extension.runAssembly', () => {
+	// 	vscode.commands.executeCommand('extension.runAssembly');
+	// }));
 }
 
-vscode.commands.registerCommand('extension.runAssembly', () => {
+function runAssemblyCode() {
 	const editor = vscode.window.activeTextEditor;
 
 	if (editor) {
@@ -47,7 +44,7 @@ vscode.commands.registerCommand('extension.runAssembly', () => {
 	} else {
 		vscode.window.showWarningMessage('No active text editor.');
 	}
-});
+};
 
 function modifyExecutorMapByFileExtension() {
 	const destinationPath = path.join(__dirname, 'scripts', 'assemble');
@@ -59,18 +56,88 @@ function modifyExecutorMapByFileExtension() {
 
 	userSettings.update("code-runner.executorMapByFileExtension", codeRunnerExtConf, vscode.ConfigurationTarget.Global)
 		.then(() => {
-			vscode.window.showInformationMessage('Successfully updated Assembly Code Runner Configuration.');
+			vscode.window.showInformationMessage('Updated Code Runner Configuration for Assembly.');
 		})
 		.catch(error => {
 			vscode.window.showErrorMessage(`Error updating Assembly Configuration: ${error.message}`);
 		});
 }
 
-vscode.commands.registerCommand('extension.modifyExecutorMap', modifyExecutorMapByFileExtension);
+function installNASMndGCC() {
+	const platform = process.platform;
+
+	if (platform === 'win32') {
+		installOnWindows();
+	} else if (platform === 'darwin') {
+		installOnMacOS();
+	} else {
+		vscode.window.showErrorMessage('Please install the software manually.');
+	}
+}
+
+function installOnWindows() {
+	exec('winget install -e --id NASM.NASM', (error, stdout, stderr) => {
+		if (error) {
+			vscode.window.showErrorMessage(`Error installing NASM: ${error.message}`);
+			return;
+		}
+		if (stderr) {
+			vscode.window.showErrorMessage(`Error installing NASM: ${stderr}`);
+			return;
+		}
+		vscode.window.showInformationMessage('NASM installed successfully.');
+	});
+
+	exec('winget install -e --id GCC.GCC', (error, stdout, stderr) => {
+		if (error) {
+			vscode.window.showErrorMessage(`Error installing GCC: ${error.message}`);
+			return;
+		}
+		if (stderr) {
+			vscode.window.showErrorMessage(`Error installing GCC: ${stderr}`);
+			return;
+		}
+		vscode.window.showInformationMessage('GCC installed successfully.');
+	});
+}
+
+function installOnMacOS() {
+	exec('brew install nasm', (error, stdout, stderr) => {
+		if (error) {
+			vscode.window.showErrorMessage(`Error installing NASM: ${error.message}`);
+			return;
+		}
+		if (stderr) {
+			vscode.window.showErrorMessage(`Error installing NASM: ${stderr}`);
+			return;
+		}
+		vscode.window.showInformationMessage('NASM installed successfully.');
+	});
+
+	exec('brew install gcc', (error, stdout, stderr) => {
+		if (error) {
+			vscode.window.showErrorMessage(`Error installing GCC: ${error.message}`);
+			return;
+		}
+		if (stderr) {
+			vscode.window.showErrorMessage(`Error installing GCC: ${stderr}`);
+			return;
+		}
+		vscode.window.showInformationMessage('GCC installed successfully.');
+	});
+}
 
 function deactivate() { }
 
+// register the commands
+vscode.commands.registerCommand('extension.runAssembly', runAssemblyCode);
+vscode.commands.registerCommand('extension.installNASMndGCC', installNASMndGCC);
+vscode.commands.registerCommand('extension.modifyExecutorMap', modifyExecutorMapByFileExtension);
+
 module.exports = {
 	activate,
-	deactivate
+	deactivate,
+	runAssemblyCode,
+	modifyExecutorMapByFileExtension,
+	installNASMndGCC
 };

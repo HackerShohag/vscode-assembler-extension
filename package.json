@@ -2,7 +2,7 @@
   "name": "assembler",
   "displayName": "Assembly Code Runner",
   "description": "A assembly code runner that compiles using NASM and links through GCC to make executable for host platform.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "HackerShohag",
   "icon": "images/assembler-logo.png",
   "engines": {
@@ -23,31 +23,40 @@
         "title": "Run Assembly Code"
       },
       {
+        "command": "extension.installNASMndGCC",
+        "title": "Install NASM and GCC"
+      },
+      {
         "command": "extension.modifyExecutorMap",
         "title": "Add configuration to Code Runner"
       }
     ],
     "languages": [
       {
-          "id": "assembly",
-          "aliases": ["asm", "assembly"],
-          "extensions": [".asm"],
-          "configuration": "path.join(vscode.extensions.get('HackerShohag.assembler').extensionPath, \".vscode\",\"assemblyRunner.json\")" 
+        "id": "assembly",
+        "aliases": [
+          "asm",
+          "assembly"
+        ],
+        "extensions": [
+          ".asm"
+        ],
+        "configuration": "path.join(vscode.extensions.get('HackerShohag.assembler').extensionPath, \".vscode\",\"assemblyRunner.json\")"
       }
     ]
   },
   "tasks": [
-  {
+    {
       "label": "Run Assembly",
       "type": "shell",
       "command": "${command:extension.runAssembly}",
       "group": {
-          "kind": "build",
-          "isDefault": true
+        "kind": "build",
+        "isDefault": true
       },
       "presentation": {
-          "reveal": "always",
-          "panel": "shared"
+        "reveal": "always",
+        "panel": "shared"
       }
     }
   ],
@@ -64,6 +73,7 @@
     "eslint": "^8.50.0",
     "glob": "^10.3.3",
     "mocha": "^10.2.0",
+    "sinon": "^16.1.0",
     "typescript": "^5.2.2",
     "vscode": "^1.1.37"
   },
