@@ -10,10 +10,100 @@ This simple bash script, named 'assemble,' streamlines the process of assembling
 * Automatically detects the host platform and compiles the code accordingly.
 * Generates an executable binary with a 'main' section for C-style program entry points.
 
-## Basic Requirements
+# Requirements
 
-* NASM (for linux `apt install nasm`, for macOS and windows visit https://www.nasm.us/)
-* GCC (GNU Compiler Collection, for linux `apt install gcc`, for macOS and windows visit https://gcc.gnu.org/install/binaries.html)
+## Basic Requrements
+
+* NASM (Netwide Assembler, widely used assembly language compiler, https://www.nasm.us/)
+* GCC (GNU Compiler Collection, widely used compiler for the C and C++, https://gcc.gnu.org/install/binaries.html)
+
+### Installing NASM and GCC on Windows:
+
+**NASM (Netwide Assembler):**
+
+1. **Download NASM:**
+   - Visit the official NASM website: [NASM Downloads](https://www.nasm.us/pub/nasm/releasebuilds/)
+   - Download the Windows installer (usually a `.exe` file) for the latest version.
+
+2. **Run the Installer:**
+   - Double-click the downloaded `.exe` file to run the installer.
+   - Follow the on-screen instructions to complete the installation.
+
+3. **Verify the Installation:**
+   - Open Command Prompt or PowerShell and run:
+     ```bash
+     nasm --version
+     ```
+   - It should display the installed NASM version.
+
+**GCC (GNU Compiler Collection):**
+
+1. **Install GCC:**
+   - Visit the official NASM website: [GNU GCC Downloads](https://gcc.gnu.org/install/binaries.html)
+   - Download the Windows installer (usually a `.exe` file) for the latest version.
+
+2. **Run the Installer:**
+   - Double-click the downloaded `.exe` file to run the installer.
+   - Follow the on-screen instructions to complete the installation.
+
+3. **Verify the Installation:**
+   - In the MSYS2 terminal, run:
+     ```bash
+     gcc --version
+     ```
+   - It should display the installed GCC version.
+
+### Installing NASM and GCC on Linux (e.g., Ubuntu):
+
+1. **Update the Package List:**
+   - Open Terminal.
+   - Run the following command to update the package list:
+     ```bash
+     sudo apt-get update
+     ```
+
+2. **Install NASM and GCC:**
+   - Run the following command to install NASM:
+     ```bash
+     sudo apt-get install nasm gcc
+     ```
+
+3. **Verify the Installation:**
+   - In Terminal, run:
+     ```bash
+     nasm --version
+     ```   
+   - For GCC, run:
+     ```bash
+     gcc --version
+     ```
+   - It should display the installed NASM and GCC version.
+
+### Installing NASM and GCC on macOS:
+
+**NASM (Netwide Assembler):**
+
+1. **Install NASM via Homebrew:**
+   - Open Terminal.
+   - If you don't have Homebrew installed, follow the instructions in [Installing Homebrew on macOS](#installing-homebrew-on-macos) section.
+   - Run the following command to install NASM:
+     ```bash
+     brew install nasm gcc
+     ```
+
+2. **Verify the Installation:**
+   - In Terminal, run:
+     ```bash
+     nasm --version
+     ```
+   - Again for GCC, run:
+     ```bash
+     gcc --version
+     ```
+   - It should display the installed NASM and GCC version.
+
+These instructions should help you install NASM and GCC on Windows, Linux (Ubuntu), and macOS. Make sure to adapt the Linux instructions for other distributions if needed.
+
 
 ## VSCode extensions Requirements (For installing GCC and NASM automatically)
 
@@ -21,11 +111,11 @@ This installing guide is for the automatic installion of NASM and GCC if you hav
 
 ### Installing Winget on Windows 11:
 
-1. **Open the Microsoft Store**
+1. **Open the Microsoft Store.**
 
-2. **Search for "Windows Package Manager" (Winget) or App Installer or click [here](https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1)**
+2. **Search for "Windows Package Manager" (Winget) or App Installer or click [here](https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1).**
 
-3. **Install Windows Package Manager (Winget)**
+3. **Install Windows Package Manager (Winget).**
 
 4. **Verify the Installation:**
    - Once installed, you can verify the installation by opening PowerShell or Command Prompt and running:
@@ -34,7 +124,7 @@ This installing guide is for the automatic installion of NASM and GCC if you hav
      ```
    - It should display the installed Winget version.
 
-A more detailed guide can be found [here](https://pureinfotech.com/install-winget-windows-11)
+For a more detailed guide, you can visit Microsoft's Official [website](https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget).
 
 ### Installing Homebrew on macOS:
 
@@ -47,7 +137,8 @@ A more detailed guide can be found [here](https://pureinfotech.com/install-winge
      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
      ```
 
-3. **Follow the On-Screen Instructions to complete installation**
+3. **Follow the On-Screen Instructions to complete installation.**
+
 4. **Verify the Installation:**
    - To confirm that Homebrew is installed, you can run the following command in the Terminal:
      ```bash
@@ -57,7 +148,7 @@ A more detailed guide can be found [here](https://pureinfotech.com/install-winge
 
 For more detailed information and troubleshooting, you can refer to the official Homebrew installation guide on their [website](https://brew.sh/).
 
-* After installing these requirements you need to run the `installNASMndGCC` command manually to auto install NASM and GCC for Windows and macOS. To do so run, `Ctrl + Shift + P` and search for `Assembler: Install NASM and GCC`. Hit return after to execute the command. This will automatically install NASM and GCC for the desired platform using winget for Windows and homebrew for macOS.
+> Note: If you have the extension installed before meeting these requirements you need to run the `installNASMndGCC` command manually to auto install NASM and GCC for Windows and macOS. To do so run, `Ctrl + Shift + P` and search for `Assembler: Install NASM and GCC`. Hit return after to execute the command. This will automatically install NASM and GCC for the desired platform using winget for Windows and homebrew for macOS.
 
 ![installNASMndGCC](https://github.com/HackerShohag/vscode-assembler-extension/assets/47150885/7d09d8a8-ffc5-4611-910c-c62ce1d46bb0)
 
