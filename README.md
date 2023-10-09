@@ -130,22 +130,22 @@ main:
 
 **For macOS (Due to Compiler Dependency):**
 ```assembly
-      global _main
-      extern _puts
+   global _main
+   extern _puts
 
-      section .text
-   _main:
-      sub     rsp, 8
+   section .text
+_main:
+   sub     rsp, 8
 
-      lea     rdi, [message]        ; Use this instead of 'mov rdi, message'
-      call    _puts
-      add     rsp, 8
-      ret
+   lea     rdi, [message]        ; Use this instead of 'mov rdi, message'
+   call    _puts
+   add     rsp, 8
+   ret
 
-      section .data
-   message:
-   default rel                     ; Add 'default rel' under label
-      db   "Hello, world",0
+   section .data
+message:
+default rel                     ; Add 'default rel' under label
+   db   "Hello, world",0
 ```
 
 ## Author

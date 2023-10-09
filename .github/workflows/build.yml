@@ -1,0 +1,49 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+    - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v1
+        with:
+            fetch-depth: 0
+
+      - name: Set Current Version as Environment Variable
+        run: |
+            echo "VERSION=$(jq -r .version package.json)" >> $GITHUB_ENV
+            
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.0
+          cache: "npm"
+
+      - name: Install dependencies
+        run: |
+          npm install vscode --save-dev
+          npm install -g @vscode/vsce
+
+      - name: Build App
+        run: vsce package
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-build-artifacts
+          path: assembler*.vsix
+
+      - name: Release Artifacts
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.VSCODE_EXT }}"
+          automatic_release_tag: "v${{ env.VERSION }}"
+          prerelease: false
+          title: "Release (${{ env.VERSION }})"
+          files: assembler*.vsix
