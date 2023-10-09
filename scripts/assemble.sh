@@ -45,7 +45,7 @@ echo -- Found file $file
 
 # assemble
 echo "${PURPLE}${BOLD}NASM:${NORMAL}${PURPLE} Assebmling $file${NORMAL}${NC}"
-nasmerr=$(nasm -f elf $file)
+nasmerr=$(nasm -f macho64 $file)
 
 if ! [ $? -eq 0 ]; then
     echo $nasmerr
@@ -55,7 +55,7 @@ echo "${GREEN}${BOLD}NASM:${NORMAL}${GREEN} Assebmled $file"
 
 #link
 echo "${PURPLE}${BOLD}GCC:${NORMAL}${PURPLE} Linking $filename.o using gcc${NORMAL}${NC}"
-linkerr=$(gcc -m32 -o $filename $filename.o)
+linkerr=$(gcc -arch x86_64 -o $filename $filename.o)
 
 if ! [ $? -eq 0 ]; then
     echo $linkerr

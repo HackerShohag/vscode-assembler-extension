@@ -13,7 +13,6 @@ function activate(context) {
 	}
 
 	modifyExecutorMapByFileExtension();
-	installNASMndGCC();
 
 	// context.subscriptions.push(vscode.commands.registerCommand('extension.runAssembly', () => {
 	// 	vscode.commands.executeCommand('extension.runAssembly');
@@ -47,12 +46,20 @@ function runAssemblyCode() {
 };
 
 function modifyExecutorMapByFileExtension() {
-	const destinationPath = path.join(__dirname, 'scripts', 'assemble');
 	const userSettings = vscode.workspace.getConfiguration();
 	const codeRunnerExtConf = userSettings.get("code-runner.executorMapByFileExtension");
+	const platform = process.platform;
+	let destinationPath;
+
+	if (platform === 'darwin') {
+		destinationPath = path.join(__dirname, 'scripts', 'assemble.sh');
+	} else if (platform == 'win32') {
+		destinationPath = path.join(__dirname, 'scripts', 'assemble.bat');
+	} else {
+		destinationPath = path.join(__dirname, 'scripts', 'assemble');
+	}
 
 	codeRunnerExtConf[".asm"] = "cd $dir && " + `${destinationPath}` + " $fileName";
-	console.log(codeRunnerExtConf[".asm"]);
 
 	userSettings.update("code-runner.executorMapByFileExtension", codeRunnerExtConf, vscode.ConfigurationTarget.Global)
 		.then(() => {
@@ -63,75 +70,10 @@ function modifyExecutorMapByFileExtension() {
 		});
 }
 
-function installNASMndGCC() {
-	const platform = process.platform;
-
-	if (platform === 'win32') {
-		installOnWindows();
-	} else if (platform === 'darwin') {
-		installOnMacOS();
-	} else {
-		vscode.window.showErrorMessage('For Linux platform, install the software manually.');
-	}
-}
-
-function installOnWindows() {
-	exec('winget install -e --id NASM.NASM', (error, stdout, stderr) => {
-		if (error) {
-			vscode.window.showErrorMessage(`Error installing NASM: ${error.message}`);
-			return;
-		}
-		if (stderr) {
-			vscode.window.showErrorMessage(`Error installing NASM: ${stderr}`);
-			return;
-		}
-		vscode.window.showInformationMessage('NASM installed successfully.');
-	});
-
-	exec('winget install -e --id GCC.GCC', (error, stdout, stderr) => {
-		if (error) {
-			vscode.window.showErrorMessage(`Error installing GCC: ${error.message}`);
-			return;
-		}
-		if (stderr) {
-			vscode.window.showErrorMessage(`Error installing GCC: ${stderr}`);
-			return;
-		}
-		vscode.window.showInformationMessage('GCC installed successfully.');
-	});
-}
-
-function installOnMacOS() {
-	exec('brew install nasm', (error, stdout, stderr) => {
-		if (error) {
-			vscode.window.showErrorMessage(`Error installing NASM: ${error.message}`);
-			return;
-		}
-		if (stderr) {
-			vscode.window.showErrorMessage(`Error installing NASM: ${stderr}`);
-			return;
-		}
-		vscode.window.showInformationMessage('NASM installed successfully.');
-	});
-
-	exec('brew install gcc', (error, stdout, stderr) => {
-		if (error) {
-			vscode.window.showErrorMessage(`Error installing GCC: ${error.message}`);
-			return;
-		}
-		if (stderr) {
-			vscode.window.showErrorMessage(`Error installing GCC: ${stderr}`);
-			return;
-		}
-		vscode.window.showInformationMessage('GCC installed successfully.');
-	});
-}
-
 function deactivate() { }
 
 // register the commands
 vscode.commands.registerCommand('extension.runAssembly', runAssemblyCode);
-vscode.commands.registerCommand('extension.installNASMndGCC', installNASMndGCC);
 vscode.commands.registerCommand('extension.modifyExecutorMap', modifyExecutorMapByFileExtension);
 
 module.exports = {
@@ -139,5 +81,4 @@ module.exports = {
 	deactivate,
 	runAssemblyCode,
 	modifyExecutorMapByFileExtension,
-	installNASMndGCC
 };

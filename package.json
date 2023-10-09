@@ -1,7 +1,7 @@
 {
   "name": "assembler",
-  "displayName": "Assembly Code Runner",
-  "description": "A assembly code runner that compiles using NASM and links through GCC to make executable for host platform.",
+  "displayName": "Assembly Language for Code Runner",
+  "description": "An assembly language support for code runner that compiles using NASM and links through GCC to make executable for host platform.",
   "version": "0.0.3",
   "publisher": "HackerShohag",
   "icon": "images/assembler-logo.png",
@@ -20,11 +20,7 @@
     "commands": [
       {
         "command": "extension.runAssembly",
-        "title": "Assembler: Assembly Code"
-      },
-      {
-        "command": "extension.installNASMndGCC",
-        "title": "Assembler: Install NASM and GCC"
+        "title": "Assembler: Run Assembly Code"
       },
       {
         "command": "extension.modifyExecutorMap",

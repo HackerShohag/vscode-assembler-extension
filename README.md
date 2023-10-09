@@ -12,6 +12,8 @@ This simple bash script, named 'assemble,' streamlines the process of assembling
 
 # Requirements
 
+To ensure that the assemble script runs correctly, certain requirements must be installed globally on your system. The installation methods may vary depending on your operating system. Below, you will find some popular guides, but you may need to adapt the instructions to your specific system.
+
 ## Basic Requrements
 
 * NASM (Netwide Assembler, widely used assembly language compiler, https://www.nasm.us/)
@@ -21,15 +23,13 @@ This simple bash script, named 'assemble,' streamlines the process of assembling
 
 **NASM (Netwide Assembler):**
 
-1. **Download NASM:**
-   - Visit the official NASM website: [NASM Downloads](https://www.nasm.us/pub/nasm/releasebuilds/)
-   - Download the Windows installer (usually a `.exe` file) for the latest version.
+1. **Download NASM from (https://www.nasm.us/pub/nasm/releasebuilds).**
 
-2. **Run the Installer:**
-   - Double-click the downloaded `.exe` file to run the installer.
-   - Follow the on-screen instructions to complete the installation.
+2. **Run the Installer and follow the instructions.**
 
-3. **Verify the Installation:**
+3. **You may need to add NASM installation binary path to the environment variable for systemwide execution. [More details.](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14))**
+
+4. **Verify the Installation:**
    - Open Command Prompt or PowerShell and run:
      ```bash
      nasm --version
@@ -38,15 +38,13 @@ This simple bash script, named 'assemble,' streamlines the process of assembling
 
 **GCC (GNU Compiler Collection):**
 
-1. **Install GCC:**
-   - Visit the official NASM website: [GNU GCC Downloads](https://gcc.gnu.org/install/binaries.html)
-   - Download the Windows installer (usually a `.exe` file) for the latest version.
+1. **Downlaod GCC from (https://gcc.gnu.org/install/binaries.html)**
 
-2. **Run the Installer:**
-   - Double-click the downloaded `.exe` file to run the installer.
-   - Follow the on-screen instructions to complete the installation.
+2. **Run the Installer and follow the instructions.**
 
-3. **Verify the Installation:**
+3. **You may need to add NASM installation binary path to the environment variable for systemwide execution. [More details.](https://learn.microsoft.com/en-us/previous-versions/office/developer/sharepoint-2010/ee537574(v=office.14))**
+
+4. **Verify the Installation:**
    - In the MSYS2 terminal, run:
      ```bash
      gcc --version
@@ -55,28 +53,19 @@ This simple bash script, named 'assemble,' streamlines the process of assembling
 
 ### Installing NASM and GCC on Linux (e.g., Ubuntu):
 
-1. **Update the Package List:**
-   - Open Terminal.
-   - Run the following command to update the package list:
-     ```bash
-     sudo apt-get update
-     ```
-
-2. **Install NASM and GCC:**
    - Run the following command to install NASM:
      ```bash
      sudo apt-get install nasm gcc
      ```
-
-3. **Verify the Installation:**
-   - In Terminal, run:
-     ```bash
-     nasm --version
-     ```   
-   - For GCC, run:
-     ```bash
-     gcc --version
-     ```
+   - Run the following command to verify installtion:
+      * For NASM:
+         ```bash
+         nasm --version
+         ```
+      * For GCC:
+         ```bash
+         gcc --version
+         ```
    - It should display the installed NASM and GCC version.
 
 ### Installing NASM and GCC on macOS:
@@ -84,9 +73,8 @@ This simple bash script, named 'assemble,' streamlines the process of assembling
 **NASM (Netwide Assembler):**
 
 1. **Install NASM via Homebrew:**
-   - Open Terminal.
-   - If you don't have Homebrew installed, follow the instructions in [Installing Homebrew on macOS](#installing-homebrew-on-macos) section.
-   - Run the following command to install NASM:
+   - If you don't have Homebrew installed, follow the instructions [here](https://docs.brew.sh/Installation).
+   - Run the following command in terminal to install NASM:
      ```bash
      brew install nasm gcc
      ```
@@ -101,56 +89,6 @@ This simple bash script, named 'assemble,' streamlines the process of assembling
      gcc --version
      ```
    - It should display the installed NASM and GCC version.
-
-These instructions should help you install NASM and GCC on Windows, Linux (Ubuntu), and macOS. Make sure to adapt the Linux instructions for other distributions if needed.
-
-
-## VSCode extensions Requirements (For installing GCC and NASM automatically)
-
-This installing guide is for the automatic installion of NASM and GCC if you haven't installed it yet. You can skip this section if your machine have properly installed NASM and GCC mentioned in [Basic Requirements](#basic-requirements) section. This requirements needs to be fulfilled before installing the extension.
-
-### Installing Winget on Windows 11:
-
-1. **Open the Microsoft Store.**
-
-2. **Search for "Windows Package Manager" (Winget) or App Installer or click [here](https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1).**
-
-3. **Install Windows Package Manager (Winget).**
-
-4. **Verify the Installation:**
-   - Once installed, you can verify the installation by opening PowerShell or Command Prompt and running:
-     ```powershell
-     winget --version
-     ```
-   - It should display the installed Winget version.
-
-For a more detailed guide, you can visit Microsoft's Official [website](https://learn.microsoft.com/en-us/windows/package-manager/winget/#install-winget).
-
-### Installing Homebrew on macOS:
-
-1. **Open Terminal:**
-   - Press `Cmd + Space`, type "Terminal," and press Enter to open the Terminal.
-
-2. **Install Homebrew:**
-   - Run the following command in the Terminal to install Homebrew:
-     ```bash
-     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-     ```
-
-3. **Follow the On-Screen Instructions to complete installation.**
-
-4. **Verify the Installation:**
-   - To confirm that Homebrew is installed, you can run the following command in the Terminal:
-     ```bash
-     brew --version
-     ```
-   - It should display the installed Homebrew version.
-
-For more detailed information and troubleshooting, you can refer to the official Homebrew installation guide on their [website](https://brew.sh/).
-
-> Note: If you have the extension installed before meeting these requirements you need to run the `installNASMndGCC` command manually to auto install NASM and GCC for Windows and macOS. To do so run, `Ctrl + Shift + P` and search for `Assembler: Install NASM and GCC`. Hit return after to execute the command. This will automatically install NASM and GCC for the desired platform using winget for Windows and homebrew for macOS.
-
-![installNASMndGCC](https://github.com/HackerShohag/vscode-assembler-extension/assets/47150885/7d09d8a8-ffc5-4611-910c-c62ce1d46bb0)
 
 # Example
 
@@ -170,6 +108,8 @@ In summary, the 'main' section is essential because it defines where program exe
 
 Sample assembly code in 'hello.asm' with a 'main' section:
 
+**For Linux and Windows Platform:**
+
 ```assembly
 section .data
     hello db 'Hello, World!',0
@@ -186,6 +126,26 @@ main:
 
     mov eax, 1
     int 0x80
+```
+
+**For macOS (Due to Compiler Dependency):**
+```assembly
+      global _main
+      extern _puts
+
+      section .text
+   _main:
+      sub     rsp, 8
+
+      lea     rdi, [message]        ; Use this instead of 'mov rdi, message'
+      call    _puts
+      add     rsp, 8
+      ret
+
+      section .data
+   message:
+   default rel                     ; Add 'default rel' under label
+      db   "Hello, world",0
 ```
 
 ## Author
