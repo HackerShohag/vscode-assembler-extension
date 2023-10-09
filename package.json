@@ -2,7 +2,7 @@
   "name": "assembler",
   "displayName": "Assembly Language for Code Runner",
   "description": "An assembly language support for code runner that compiles using NASM and links through GCC to make executable for host platform.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "publisher": "HackerShohag",
   "icon": "images/assembler-logo.png",
   "engines": {
