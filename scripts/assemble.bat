@@ -47,7 +47,7 @@ if not "%ext%" == "asm" (
 :: Assemble
 echo.
 echo Assembling %file%
-nasm -f win32 %file% -o %file%.o
+nasm -f win32 %file% -o %filename%.o
 if not !errorlevel! == 0 (
   pause>nul
   exit /b 1

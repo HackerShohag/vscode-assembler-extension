@@ -45,7 +45,7 @@ echo -- Found file $file
 
 # assemble
 echo "${PURPLE}${BOLD}NASM:${NORMAL}${PURPLE} Assebmling $file${NORMAL}${NC}"
-nasmerr=$(nasm -f macho64 $file -o $file.o)
+nasmerr=$(nasm -f macho64 $file -o $filename.o)
 
 if ! [ $? -eq 0 ]; then
     echo $nasmerr

@@ -6,15 +6,15 @@ const extensionID = 'HackerShohag.assembler';
 function activate(context) {
 
 	const isActived = vscode.extensions.getExtension(extensionID).isActive;
-	const isCodeRunnerActived = vscode.extensions.getExtension("formulahendry.code-runner").isActive;
+	const codeRunnerExt = vscode.extensions.getExtension("formulahendry.code-runner");
 	const platform = process.platform;
 
 	if (platform == "win32") {
-		vscode.window.showWarningMessage('Warning: Windows Machines are not properly supported yet.');
+		vscode.window.showWarningMessage('Assembler: Warning: Windows Machines are not properly supported yet.');
 	}
 
-	if (!isCodeRunnerActived) {
-		vscode.window.showErrorMessage('Code Runner Extension needs to be installed or activated.');
+	if (!codeRunnerExt) {
+		vscode.window.showErrorMessage('Assembler: Code Runner Extension needs to be installed.');
 		return;
 	}
 
@@ -37,7 +37,7 @@ function runAssemblyCode() {
 		const terminals = vscode.window.terminals;
 		let terminal;
 
-		vscode.window.showInformationMessage('Running Assembly Code!');
+		vscode.window.showInformationMessage('Assembler: Running Assembly Code!');
 
 		if (terminals.length === 0) {
 			terminal = vscode.window.createTerminal('Assembly Terminal');
@@ -50,7 +50,7 @@ function runAssemblyCode() {
 		terminal.sendText(`${destinationPath} "${filePath}"`, true);
 		terminal.show();
 	} else {
-		vscode.window.showWarningMessage('No active text editor.');
+		vscode.window.showWarningMessage('Assembler: No active text editor.');
 	}
 };
 
@@ -73,10 +73,10 @@ function modifyExecutorMapByFileExtension() {
 	codeRunnerExtConf[".asm"] = "cd $dir && " + `${destinationPath}` + " $fileName";
 	userSettings.update("code-runner.executorMapByFileExtension", codeRunnerExtConf, vscode.ConfigurationTarget.Global)
 		.then(() => {
-			vscode.window.showInformationMessage('Updated Code Runner Configuration for Assembly Language (.asm).');
+			vscode.window.showInformationMessage('Assembler: Updated Code Runner Configuration for Assembly Language (.asm).');
 		})
 		.catch(error => {
-			vscode.window.showErrorMessage(`Error updating Assembly Configuration: ${error.message}`);
+			vscode.window.showErrorMessage(`Assembler: Error updating Assembly Configuration: ${error.message}`);
 		});
 }
 

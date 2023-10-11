@@ -4,7 +4,7 @@ This simple bash script, named 'assemble,' streamlines the process of assembling
 
 > :warning: These extensions currently doesn't provide proper support for Windows Machines. So, please consider before installing it.
 
-![output](https://github.com/HackerShohag/vscode-assembler-extension/assets/47150885/c8a7ef37-20e7-4adf-bd9f-8419ea6e557f)
+![runAssembly](https://github.com/HackerShohag/vscode-assembler-extension/assets/47150885/0e09220d-0c0d-4d26-8b1b-f64cb953c2ed)
 
 ## Features
 
