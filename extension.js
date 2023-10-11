@@ -1,16 +1,25 @@
 const vscode = require('vscode');
-const { exec } = require('child_process');
+// const { exec } = require('child_process');
 const path = require('path');
 const extensionID = 'HackerShohag.assembler';
 
 function activate(context) {
 
 	const isActived = vscode.extensions.getExtension(extensionID).isActive;
+	const isCodeRunnerActived = vscode.extensions.getExtension("formulahendry.code-runner").isActive;
+	const platform = process.platform;
 
-	if (isActived) {
-		vscode.window.showInformationMessage('Extension is already activated.');
+	if (platform == "win32") {
+		vscode.window.showWarningMessage('Warning: Windows Machines are not properly supported yet.');
+	}
+
+	if (!isCodeRunnerActived) {
+		vscode.window.showErrorMessage('Code Runner Extension needs to be installed or activated.');
 		return;
 	}
+
+	if (isActived)
+		return;
 
 	modifyExecutorMapByFileExtension();
 
@@ -51,16 +60,17 @@ function modifyExecutorMapByFileExtension() {
 	const platform = process.platform;
 	let destinationPath;
 
-	if (platform === 'darwin') {
+	if (platform === 'darwin')
 		destinationPath = path.join(__dirname, 'scripts', 'assemble.sh');
-	} else if (platform == 'win32') {
+	else if (platform == 'win32')
 		destinationPath = path.join(__dirname, 'scripts', 'assemble.bat');
-	} else {
+	else
 		destinationPath = path.join(__dirname, 'scripts', 'assemble');
-	}
+
+	if (codeRunnerExtConf[".asm"] == "cd $dir && " + `${destinationPath}` + " $fileName")
+		return;
 
 	codeRunnerExtConf[".asm"] = "cd $dir && " + `${destinationPath}` + " $fileName";
-
 	userSettings.update("code-runner.executorMapByFileExtension", codeRunnerExtConf, vscode.ConfigurationTarget.Global)
 		.then(() => {
 			vscode.window.showInformationMessage('Updated Code Runner Configuration for Assembly Language (.asm).');

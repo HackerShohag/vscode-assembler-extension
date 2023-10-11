@@ -2,6 +2,8 @@
 
 This simple bash script, named 'assemble,' streamlines the process of assembling and compiling assembly code for your host platform using NASM (Netwide Assembler) and GCC (GNU Compiler Collection). With 'assemble,' you can quickly turn your assembly source code into an executable binary with a 'main' section instead of '_start,' making it compatible with C-style program entry points.
 
+> :warning: These extensions currently doesn't provide proper support for Windows Machines. So, please consider before installing it.
+
 ![output](https://github.com/HackerShohag/vscode-assembler-extension/assets/47150885/c8a7ef37-20e7-4adf-bd9f-8419ea6e557f)
 
 ## Features
@@ -12,7 +14,8 @@ This simple bash script, named 'assemble,' streamlines the process of assembling
 
 # Requirements
 
-To ensure that the assemble script runs correctly, certain requirements must be installed globally on your system. The installation methods may vary depending on your operating system. Below, you will find some popular guides, but you may need to adapt the instructions to your specific system.
+* This extension explicitly depends on [Code Runner](https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner). So, you will need to be installed Code Runner extension to run assembly script.
+* To ensure that the assemble script runs correctly, certain requirements must be installed globally on your system. The installation methods may vary depending on your operating system. Below, you will find some popular guides, but you may need to adapt the instructions to your specific system.
 
 ## Basic Requrements
 
